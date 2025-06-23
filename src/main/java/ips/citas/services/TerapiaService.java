@@ -2,6 +2,7 @@ package ips.citas.services;
 
 import ips.citas.dto.TerapiaRequestDTO;
 import ips.citas.dto.TerapiaResponseDTO;
+import ips.citas.dto.TerapiaUpdateSesionesDTO;
 import ips.citas.entity.Orden;
 import ips.citas.entity.Terapia;
 import ips.citas.exeption.ResourceNotFoundException;
@@ -21,5 +22,7 @@ public interface TerapiaService {
     void eliminarTerapia(Long id);
     TerapiaResponseDTO obtenerTerapiaPorId(Long id);
     List<TerapiaResponseDTO> listarTerapiasPorOrden(Long ordenId);
+    TerapiaResponseDTO actualizarSesiones(Long id, TerapiaUpdateSesionesDTO sesionesDTO);
+
 }
 

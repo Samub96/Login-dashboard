@@ -21,7 +21,8 @@ public class PacienteController {
 
     @Autowired
     private PacienteService pacienteService;
-    @PreAuthorize("hasRole('ADMIN') or hasRole('SECRETARIA')")
+
+    @PreAuthorize("hasAuthority('ADMIN') or hasAuthority('SECRETARIA')")
     @PostMapping
     public ResponseEntity<PacienteResponseDTO> crearPaciente(@Valid @RequestBody PacienteRequestDTO pacienteDTO) {
         return ResponseEntity.status(HttpStatus.CREATED).body(pacienteService.crearPaciente(pacienteDTO));

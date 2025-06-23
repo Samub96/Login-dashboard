@@ -41,5 +41,12 @@ public class UsuarioServiceImpl implements UsuarioService {
 
         return jwtUtil.generateToken(usuario.getUsername(), usuario.getRol().name());
     }
+
+    @Override
+    public Usuario buscarPorUsername(String username) {
+        return usuarioRepository.findByUsername(username)
+                .orElseThrow(() -> new RuntimeException("Usuario no encontrado"));
+    }
+
 }
 

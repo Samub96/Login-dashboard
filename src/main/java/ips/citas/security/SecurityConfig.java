@@ -29,7 +29,9 @@ public class SecurityConfig {
                 .cors(Customizer.withDefaults()) // Habilita CORS correctamente
                 .csrf(csrf -> csrf.disable())
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/api/auth/**").permitAll() // No necesitas AntPathRequestMatcher
+                        .requestMatchers("/api/auth/**").permitAll()
+                        .requestMatchers("/api/pacientes/**").permitAll()
+                        .requestMatchers("/api/ordenes/**").authenticated()// No necesitas AntPathRequestMatcher
                         .anyRequest().authenticated()
                 )
                 .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class)

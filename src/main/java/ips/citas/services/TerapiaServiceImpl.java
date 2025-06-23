@@ -2,6 +2,7 @@ package ips.citas.services;
 
 import ips.citas.dto.TerapiaRequestDTO;
 import ips.citas.dto.TerapiaResponseDTO;
+import ips.citas.dto.TerapiaUpdateSesionesDTO;
 import ips.citas.entity.Orden;
 import ips.citas.entity.Terapia;
 import ips.citas.exeption.ResourceNotFoundException;
@@ -85,6 +86,16 @@ public class TerapiaServiceImpl implements TerapiaService {
         return terapias.stream()
                 .map(this::convertToDto)
                 .collect(Collectors.toList());
+    }
+
+    @Override
+    public TerapiaResponseDTO actualizarSesiones(Long id, TerapiaUpdateSesionesDTO sesionesDTO) {
+        Terapia terapia = terapiaRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Terapia no encontrada con ID: " + id));
+
+        terapia.setSesionesRealizadas(sesionesDTO.getSesionesRealizadas());
+
+        return convertToDto(terapia);
     }
 
     private TerapiaResponseDTO convertToDto(Terapia terapia) {

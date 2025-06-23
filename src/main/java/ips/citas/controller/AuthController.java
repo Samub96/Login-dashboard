@@ -25,8 +25,13 @@ public class AuthController {
     @PostMapping("/login")
     public ResponseEntity<AuthResponse> login(@RequestBody AuthRequest request) {
         String token = usuarioService.login(request.getUsername(), request.getPassword());
-        return ResponseEntity.ok(new AuthResponse(token));
+
+        // Obtener usuario para devolver su rol
+        Usuario usuario = usuarioService.buscarPorUsername(request.getUsername());
+
+        return ResponseEntity.ok(new AuthResponse(token, usuario.getUsername(), usuario.getRol().name()));
     }
+
 }
 
 

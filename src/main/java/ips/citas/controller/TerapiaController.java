@@ -2,6 +2,7 @@ package ips.citas.controller;
 
 import ips.citas.dto.TerapiaRequestDTO;
 import ips.citas.dto.TerapiaResponseDTO;
+import ips.citas.dto.TerapiaUpdateSesionesDTO;
 import ips.citas.services.TerapiaService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -53,6 +54,12 @@ public class TerapiaController {
 
         TerapiaResponseDTO respuesta = terapiaService.actualizarTerapiaSesion(id, terapiaDTO);
         return ResponseEntity.ok(respuesta);
+    }
+    @PutMapping("/sesiones/{id}")
+    public ResponseEntity<TerapiaResponseDTO> actualizarSesiones(
+            @PathVariable Long id,
+            @Valid @RequestBody TerapiaUpdateSesionesDTO sesionesDTO) {
+        return ResponseEntity.ok(terapiaService.actualizarSesiones(id, sesionesDTO));
     }
 
 }
