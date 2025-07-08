@@ -32,6 +32,7 @@ public class SecurityConfig {
                         .requestMatchers("/api/auth/**").permitAll()
                         .requestMatchers("/api/pacientes/**").permitAll()
                         .requestMatchers("/api/ordenes/**").authenticated()// No necesitas AntPathRequestMatcher
+                        .requestMatchers("/", "/api/auth/**").permitAll()
                         .anyRequest().authenticated()
                 )
                 .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class)
