@@ -1,0 +1,28 @@
+body {
+    font-family: Arial, sans-serif;
+    padding: 20px;
+}
+
+nav button {
+    margin-right: 10px;
+    padding: 5px 10px;
+}
+
+.vista {
+    margin-top: 20px;
+}
+
+input {
+    margin-bottom: 10px;
+}
+
+button {
+    cursor: pointer;
+}
+
+div {
+    white-space: pre-wrap;
+    background-color: #f0f0f0;
+    padding: 10px;
+    margin-top: 10px;
+}

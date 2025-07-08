@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Dashboard - Gestión de Pacientes</title>
+    <div id="usuario-info"></div>
+
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+    <h1>Gestión de Pacientes</h1>
+
+    <!-- Barra de navegación -->
+  <nav>
+    <button id="btn-registrar-paciente" onclick="mostrarVista('registro')">Registrar Paciente</button>
+    <button id="btn-buscar-paciente" onclick="mostrarVista('buscar')">Buscar Paciente</button>
+    <button id="btn-registrar-orden" onclick="mostrarVista('orden')">Registrar Orden</button>
+    <button id="btn-registrar-terapia" onclick="mostrarVista('terapia')">Registrar Terapia</button>
+    <button id="btn-editar-paciente" onclick="mostrarVista('editar-paciente')">Editar Paciente</button>
+    <button id="btn-editar-terapia" onclick="mostrarVista('editar-terapia')">Editar Terapia</button>
+    <button id="btn-logout" onclick="cerrarSesion()">Cerrar sesión</button>
+</nav>
+
+    <!-- Vista para registrar paciente -->
+    <section id="vista-registro" class="vista" style="display:none;">
+        <h2>Registrar Paciente</h2>
+        <label>Documento: <input type="text" id="doc"></label><br>
+        <label>Nombre: <input type="text" id="nombre"></label><br>
+        <label>Apellido: <input type="text" id="apellido"></label><br>
+        <label>Entidad Salud: <input type="text" id="entidad"></label><br>
+        <button onclick="registrarPaciente()">Guardar Paciente</button>
+    </section>
+
+    <!-- Vista para buscar paciente -->
+    <section id="vista-buscar" class="vista" style="display:none;">
+        <h2>Buscar Paciente</h2>
+        <label>ID Paciente: <input type="number" id="buscar-id"></label><br>
+        <button onclick="buscarPaciente()">Buscar</button>
+        <div id="resultado"></div>
+    </section>
+
+    <!-- Vista para registrar orden -->
+    <section id="vista-orden" class="vista" style="display:none;">
+        <h2>Registrar Orden</h2>
+        <label>Número de Orden: <input type="text" id="numero-orden"></label><br>
+        <label>ID del Paciente: <input type="number" id="orden-paciente-id"></label><br>
+        <button onclick="registrarOrden()">Registrar Orden</button>
+    </section>
+
+    <!-- Vista para registrar terapia -->
+    <section id="vista-terapia" class="vista" style="display:none;">
+        <h2>Registrar Terapia</h2>
+        <label>Nombre Terapia: <input type="text" id="nombre-terapia"></label><br>
+        <label>Cantidad Sesiones: <input type="number" id="cantidad-sesiones"></label><br>
+        <label>ID de Orden: <input type="number" id="terapia-orden-id"></label><br>
+        <button onclick="registrarTerapia()">Registrar Terapia</button>
+    </section>
+
+    <!-- Vista para editar paciente -->
+    <section id="vista-editar-paciente" class="vista" style="display:none;">
+        <h2>Editar Paciente</h2>
+        <label>ID Paciente: <input type="number" id="editar-id"></label><br>
+        <label>Documento: <input type="text" id="editar-doc"></label><br>
+        <label>Nombre: <input type="text" id="editar-nombre"></label><br>
+        <label>Apellido: <input type="text" id="editar-apellido"></label><br>
+        <label>Entidad Salud: <input type="text" id="editar-entidad"></label><br>
+        <button onclick="editarPaciente()">Guardar cambios</button>
+    </section>
+
+    <!-- Vista para editar terapia -->
+    <section id="vista-editar-terapia" class="vista" style="display:none;">
+        <h2>Editar Terapia</h2>
+        <label>ID Terapia: <input type="number" id="editar-terapia-id"></label><br>
+        <label>Sesiones Realizadas: <input type="number" id="editar-sesiones-realizadas"></label><br>
+        <button onclick="editarTerapia()">Editar Terapia</button>
+    </section>
+
+    <!-- Vista para buscar por documento -->
+    <section id="vista-buscar-doc" class="vista" style="display:none;">
+        <h2>Buscar por Documento</h2>
+        <label>Documento: <input type="text" id="buscar-doc"></label><br>
+        <button onclick="buscarPorDocumento()">Buscar</button>
+        <div id="resultado-doc"></div>
+    </section>
+
+    <!-- Vista para buscar por orden -->
+    <section id="vista-buscar-orden" class="vista" style="display:none;">
+        <h2>Buscar por Orden</h2>
+        <label>Número de Orden: <input type="text" id="buscar-orden"></label><br>
+        <button onclick="buscarPorOrden()">Buscar</button>
+        <div id="resultado-orden"></div>
+    </section>
+   
+
+    <script src="js/utils.js"></script>
+    <script src="js/paciente.js"></script>
+    <script src="js/orden.js"></script>
+    <script src="js/terapia.js"></script>
+    <script src="js/main.js"></script>
+
+</body>
+</html>

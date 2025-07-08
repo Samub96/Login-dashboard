@@ -1,6 +1,5 @@
 HELP.md
 target/
-.mvn/wrapper/*
 !**/src/main/**/target/
 !**/src/test/**/target/
 
@@ -31,5 +30,4 @@ build/
 
 ### VS Code ###
 .vscode/
-/src/docker/docker-compose.yml
-/src/main/resources/*
+/.mvn/

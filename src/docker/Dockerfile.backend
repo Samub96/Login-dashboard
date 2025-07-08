@@ -1,0 +1,7 @@
+# Dockerfile.backend
+FROM amazoncorretto:23
+WORKDIR /citas_jar
+#corregir esta linea por la ruta del .jar
+COPY backend/citas_jar/citas.jar citas.jar 
+EXPOSE 8080
+ENTRYPOINT ["java", "-jar", "citas.jar"]
