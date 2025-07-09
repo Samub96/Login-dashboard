@@ -26,13 +26,17 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         return http
-                .cors(Customizer.withDefaults()) // Habilita CORS correctamente
+                .cors(Customizer.withDefaults())
                 .csrf(csrf -> csrf.disable())
+                .formLogin(form -> form.disable()) // 🔥 Desactiva formulario de login
+                .httpBasic(basic -> basic.disable()) // 🔥 Desactiva auth básica
                 .authorizeHttpRequests(auth -> auth
+                        .requestMatchers(
+                                "/", "/frontend/**", "/static/**", "/index.html",
+                                "/css/**", "/js/**", "/images/**"
+                        ).permitAll()
                         .requestMatchers("/api/auth/**").permitAll()
                         .requestMatchers("/api/pacientes/**").permitAll()
-                        .requestMatchers("/api/ordenes/**").authenticated()// No necesitas AntPathRequestMatcher
-                        .requestMatchers("/", "/api/auth/**").permitAll()
                         .anyRequest().authenticated()
                 )
                 .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class)

@@ -49,6 +49,11 @@ public class PacienteServiceImpl implements PacienteService {
     }
 
     @Override
+    public PacienteResponseDTO actualizarPacienteByDoc(PacienteRequestDTO pacienteDTO) {
+        return null;
+    }
+
+    @Override
     public void eliminarPaciente(Long id) {
         if (!pacienteRepository.existsById(id)) {
             throw new ResourceNotFoundException("Paciente no encontrado con ID: " + id);

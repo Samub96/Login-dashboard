@@ -30,7 +30,7 @@ function registrarPaciente() {
 function buscarPaciente() {
     const id = document.getElementById('buscar-id').value;
 
-    fetch(`http://localhost:8080/api/pacientes/${id}`)
+    fetch(`http://localhost:8080/api/pacientes/buscar?documento=${id}`)
         .then(response => response.json())
         .then(data => {
             document.getElementById('resultado').innerText = JSON.stringify(data, null, 2);

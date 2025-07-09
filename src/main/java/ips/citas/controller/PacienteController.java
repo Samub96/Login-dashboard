@@ -48,10 +48,10 @@ public class PacienteController {
     public ResponseEntity<List<PacienteResponseDTO>> listarPacientes() {
         return ResponseEntity.ok(pacienteService.listarPacientes());
     }
-    @GetMapping("/buscar")
-    public ResponseEntity<PacienteResponseDTO> buscarPorDocumento(@RequestParam String documento) {
-        PacienteResponseDTO respuesta = pacienteService.obtenerPacientePorDocumento(documento);
-        return ResponseEntity.ok(respuesta);
+        @GetMapping("/buscar")
+        public ResponseEntity<PacienteResponseDTO> buscarPorDocumento(@RequestParam String documento) {
+            PacienteResponseDTO respuesta = pacienteService.obtenerPacientePorDocumento(documento);
+            return ResponseEntity.ok(respuesta);
     }
     @GetMapping("/por-terapia")
     public ResponseEntity<List<PacienteResponseDTO>> listarPorTerapia(@RequestParam String terapia) {
