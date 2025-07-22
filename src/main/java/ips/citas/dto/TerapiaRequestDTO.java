@@ -11,7 +11,7 @@ public class TerapiaRequestDTO {
     private int cantidadSesiones;
 
     @NotBlank
-    private String numeroOrden;
+    private String numeroOrden ;
 
     public TerapiaRequestDTO(String nombreTerapia, int cantidadSesiones, String numeroOrden) {
         this.nombreTerapia = nombreTerapia;
