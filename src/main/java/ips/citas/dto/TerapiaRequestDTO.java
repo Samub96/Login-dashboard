@@ -2,7 +2,6 @@ package ips.citas.dto;
 
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
 
 public class TerapiaRequestDTO {
     @NotBlank
@@ -11,13 +10,13 @@ public class TerapiaRequestDTO {
     @Min(1)
     private int cantidadSesiones;
 
-    @NotNull
-    private Long ordenId;
+    @NotBlank
+    private String numeroOrden;
 
-    public TerapiaRequestDTO(String nombreTerapia, int cantidadSesiones, Long ordenId) {
+    public TerapiaRequestDTO(String nombreTerapia, int cantidadSesiones, String numeroOrden) {
         this.nombreTerapia = nombreTerapia;
         this.cantidadSesiones = cantidadSesiones;
-        this.ordenId = ordenId;
+        this.numeroOrden = numeroOrden;
     }
 
     public TerapiaRequestDTO() {
@@ -40,11 +39,11 @@ public class TerapiaRequestDTO {
         this.cantidadSesiones = cantidadSesiones;
     }
 
-    public @NotNull Long getOrdenId() {
-        return ordenId;
+    public @NotBlank String getNumeroOrden() {
+        return numeroOrden;
     }
 
-    public void setOrdenId(@NotNull Long ordenId) {
-        this.ordenId = ordenId;
+    public void setNumeroOrden(@NotBlank String numeroOrden) {
+        this.numeroOrden = numeroOrden;
     }
 }

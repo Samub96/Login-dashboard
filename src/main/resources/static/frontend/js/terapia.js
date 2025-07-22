@@ -1,18 +1,26 @@
 function registrarTerapia() {
-    const terapia = {
-        nombreTerapia: document.getElementById('nombre-terapia').value,
-        cantidadSesiones: document.getElementById('cantidad-sesiones').value,
-        ordenId: document.getElementById('terapia-orden-id').value // Aquí es ordenId, no orden
+    const numeroOrden = document.getElementById('registro-numero-orden-terapia').value;
+    const nombreTerapia = document.getElementById('registro-nombre-terapia').value;
+    const cantidad = document.getElementById('registro-cantidad-terapia').value;
+
+    const datos = {
+        numeroOrden: numeroOrden,
+        nombreTerapia: nombreTerapia,
+        cantidadSesiones: Number(cantidad)
     };
 
     fetchAuth('http://localhost:8080/api/terapias', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(terapia)
+        body: JSON.stringify(datos)
     })
-    .then(response => response.json())
-    .then(data => alert('Terapia registrada'))
-    .catch(error => console.error('Error:', error));
+    .then(response => {
+        if (response.ok) {
+            alert('Terapia registrada correctamente');
+        } else {
+            response.text().then(msg => alert('Error: ' + msg));
+        }
+    });
 }
 
 

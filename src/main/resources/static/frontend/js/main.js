@@ -68,10 +68,13 @@ function validarAccesoVista(vista) {
         'terapia': ['ADMIN', 'SECRETARIA'],
         'editar-paciente': ['ADMIN', 'SECRETARIA'],
         'editar-terapia': ['ADMIN'],
-        'buscar': ['ADMIN', 'SECRETARIA', 'DOCTOR']
+        'buscar': ['ADMIN', 'SECRETARIA', 'DOCTOR'],
+        'buscar-doc': ['ADMIN', 'SECRETARIA', 'DOCTOR'],
+        'buscar-orden': ['ADMIN', 'SECRETARIA', 'DOCTOR'],
+        'lista-pacientes': ['ADMIN', 'SECRETARIA', 'DOCTOR'] // <-- Agregado
     };
 
-    if (!permisos[vista].includes(rol)) {
+    if (!permisos[vista] || !permisos[vista].includes(rol)) {
         alert('No tienes permisos para acceder a esta sección.');
         return false;
     }
@@ -84,6 +87,10 @@ function mostrarVista(vistaId) {
 
     document.querySelectorAll('.vista').forEach(v => v.style.display = 'none');
     document.getElementById('vista-' + vistaId).style.display = 'block';
+
+    if (vistaId === 'lista-pacientes') {
+        cargarListaPacientes();
+    }
 }
 
 
@@ -93,6 +100,11 @@ function cerrarSesion() {
     window.location.href = 'login.html';
 }
 
+function volverIndex(){
+    localStorage.removeItem('token');
+    localStorage.removeItem('rol');
+    window.location.href = 'index.html';
+}
 function mostrarUsuario() {
     const username = localStorage.getItem('username');
     const rol = localStorage.getItem('rol');

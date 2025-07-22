@@ -22,5 +22,6 @@ public interface OrdenService {
     void eliminarOrden(Long id);
     OrdenResponseDTO obtenerOrdenPorId(Long id);
     List<OrdenResponseDTO> listarOrdenesPorPaciente(Long pacienteId);
+    OrdenResponseDTO buscarPorNumeroOrden(String numeroOrden);
 }
 

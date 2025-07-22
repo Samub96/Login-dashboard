@@ -1,16 +1,24 @@
 function registrarOrden() {
-    const orden = {
-        numeroOrden: document.getElementById('numero-orden').value,
-        pacienteId: document.getElementById('orden-paciente-id').value // CAMBIO AQUÍ
+    const numeroOrden = document.getElementById('registro-numero-orden').value;
+    const pacienteId = document.getElementById('orden-paciente-id').value; // CAMBIO AQUÍ
+
+    const datos = {
+        numeroOrden: numeroOrden,
+        pacienteId: pacienteId
     };
 
     fetchAuth('http://localhost:8080/api/ordenes', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(orden)
+        body: JSON.stringify(datos)
     })
-    .then(response => response.json())
-    .then(data => alert('Orden registrada'))
+    .then(response => {
+        if (response.ok) {
+            alert('Orden registrada correctamente');
+        } else {
+            alert('Error al registrar la orden');
+        }
+    })
     .catch(error => console.error('Error:', error));
 }
 

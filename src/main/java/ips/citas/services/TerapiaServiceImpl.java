@@ -27,8 +27,8 @@ public class TerapiaServiceImpl implements TerapiaService {
 
     @Override
     public TerapiaResponseDTO crearTerapia(TerapiaRequestDTO terapiaDTO) {
-        Orden orden = ordenRepository.findById(terapiaDTO.getOrdenId())
-                .orElseThrow(() -> new ResourceNotFoundException("Orden no encontrada con ID: " + terapiaDTO.getOrdenId()));
+        Orden orden = ordenRepository.findByNumeroOrden(terapiaDTO.getNumeroOrden())
+                .orElseThrow(() -> new ResourceNotFoundException("Orden no encontrada con ID: " + terapiaDTO.getNumeroOrden()));
 
         Terapia terapia = new Terapia();
         terapia.setNombreTerapia(terapiaDTO.getNombreTerapia());
@@ -47,8 +47,8 @@ public class TerapiaServiceImpl implements TerapiaService {
 
         terapia.setNombreTerapia(terapiaDTO.getNombreTerapia());
         terapia.setCantidadSesiones(terapiaDTO.getCantidadSesiones());
-        terapia.setOrden(ordenRepository.findById(terapiaDTO.getOrdenId())
-                .orElseThrow(() -> new ResourceNotFoundException("Orden no encontrada con ID: " + terapiaDTO.getOrdenId())));
+        terapia.setOrden(ordenRepository.findByNumeroOrden(terapiaDTO.getNumeroOrden())
+                .orElseThrow(() -> new ResourceNotFoundException("Orden no encontrada con ID: " + terapiaDTO.getNumeroOrden())));
 
         return convertToDto(terapia);
     }

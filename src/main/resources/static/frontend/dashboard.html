@@ -20,6 +20,7 @@
     <button id="btn-editar-paciente" onclick="mostrarVista('editar-paciente')">Editar Paciente</button>
     <button id="btn-editar-terapia" onclick="mostrarVista('editar-terapia')">Editar Terapia</button>
     <button id="btn-logout" onclick="cerrarSesion()">Cerrar sesión</button>
+    <button onclick="mostrarVista('lista-pacientes')">Ver todos los pacientes</button>
 </nav>
 
     <!-- Vista para registrar paciente -->
@@ -35,7 +36,7 @@
     <!-- Vista para buscar paciente -->
     <section id="vista-buscar" class="vista" style="display:none;">
         <h2>Buscar Paciente</h2>
-        <label>ID Paciente: <input type="number" id="buscar-id"></label><br>
+        <label>ID Paciente: <input type="number" id="buscar-id" onkeydown="if(event.key==='Enter'){buscarPaciente();}"></label><br>
         <button onclick="buscarPaciente()">Buscar</button>
         <div id="resultado"></div>
     </section>
@@ -43,7 +44,7 @@
     <!-- Vista para registrar orden -->
     <section id="vista-orden" class="vista" style="display:none;">
         <h2>Registrar Orden</h2>
-        <label>Número de Orden: <input type="text" id="numero-orden"></label><br>
+        <label>Número de Orden: <input type="text" id="registro-numero-orden"></label><br>
         <label>ID del Paciente: <input type="number" id="orden-paciente-id"></label><br>
         <button onclick="registrarOrden()">Registrar Orden</button>
     </section>
@@ -51,9 +52,9 @@
     <!-- Vista para registrar terapia -->
     <section id="vista-terapia" class="vista" style="display:none;">
         <h2>Registrar Terapia</h2>
-        <label>Nombre Terapia: <input type="text" id="nombre-terapia"></label><br>
-        <label>Cantidad Sesiones: <input type="number" id="cantidad-sesiones"></label><br>
-        <label>ID de Orden: <input type="number" id="terapia-orden-id"></label><br>
+        <label>Número de Orden: <input type="text" id="registro-numero-orden-terapia"></label><br>
+        <label>Nombre Terapia: <input type="text" id="registro-nombre-terapia"></label><br>
+        <label>Cantidad: <input type="number" id="registro-cantidad-terapia"></label><br>
         <button onclick="registrarTerapia()">Registrar Terapia</button>
     </section>
 
@@ -79,7 +80,7 @@
     <!-- Vista para buscar por documento -->
     <section id="vista-buscar-doc" class="vista" style="display:none;">
         <h2>Buscar por Documento</h2>
-        <label>Documento: <input type="text" id="buscar-doc"></label><br>
+        <label>Documento: <input type="text" id="buscar-doc" onkeydown="if(event.key==='Enter'){buscarPorDocumento();}"></label><br>
         <button onclick="buscarPorDocumento()">Buscar</button>
         <div id="resultado-doc"></div>
     </section>
@@ -87,11 +88,31 @@
     <!-- Vista para buscar por orden -->
     <section id="vista-buscar-orden" class="vista" style="display:none;">
         <h2>Buscar por Orden</h2>
-        <label>Número de Orden: <input type="text" id="buscar-orden"></label><br>
+        <label>Número de Orden: <input type="text" id="buscar-orden" onkeydown="if(event.key==='Enter'){buscarPorOrden();}"></label><br>
         <button onclick="buscarPorOrden()">Buscar</button>
         <div id="resultado-orden"></div>
     </section>
-   
+    
+    <!-- Vista para lista de pacientes -->
+    <section id="vista-lista-pacientes" class="vista" style="display:none;">
+        <h2>Lista de Pacientes</h2>
+        <input type="text" id="filtro-paciente" placeholder="Filtrar por nombre o documento" oninput="filtrarPacientes()">
+        <button onclick="cargarListaPacientes()">Actualizar lista</button>
+        <table id="tabla-pacientes" border="1">
+            <thead>
+                <tr>
+                    <th>Nombre</th>
+                    <th>Documento</th>
+                    <th>Orden</th>
+                    <th>Terapia</th>
+                    <th>Cantidad disponible</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Aquí se insertarán los pacientes -->
+            </tbody>
+        </table>
+    </section>
 
     <script src="js/utils.js"></script>
     <script src="js/paciente.js"></script>

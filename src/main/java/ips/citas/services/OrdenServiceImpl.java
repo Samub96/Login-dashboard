@@ -15,6 +15,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -73,6 +74,13 @@ public class OrdenServiceImpl implements OrdenService {
         return ordenes.stream()
                 .map(this::convertToDto)
                 .collect(Collectors.toList());
+    }
+
+    @Override
+    public OrdenResponseDTO buscarPorNumeroOrden(String numeroOrden) {
+        Optional<Orden> ordenOpt = ordenRepository.findByNumeroOrden(numeroOrden);
+        if (ordenOpt.isEmpty()) return null;
+        return convertToDto(ordenOpt.get());
     }
 
     private OrdenResponseDTO convertToDto(Orden orden) {

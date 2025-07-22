@@ -85,3 +85,84 @@ function registrarPaciente() {
     .then(data => alert('Paciente registrado'))
     .catch(error => console.error('Error:', error));
 }
+
+let pacientesGlobal = [];
+
+function cargarListaPacientes() {
+    fetchAuth('http://localhost:8080/api/pacientes')
+        .then(response => {
+            if (!response.ok) throw new Error('No hay pacientes');
+            return response.json();
+        })
+        .then(data => {
+            pacientesGlobal = data || [];
+            mostrarPacientesFiltrados(pacientesGlobal);
+        })
+        .catch(() => {
+            pacientesGlobal = [];
+            mostrarPacientesFiltrados([]);
+        });
+}
+
+function mostrarPacientesFiltrados(lista) {
+    const tbody = document.getElementById('tabla-pacientes').querySelector('tbody');
+    tbody.innerHTML = '';
+    if (!lista || lista.length === 0) {
+        tbody.innerHTML = `<tr><td colspan="5">Lista vacía</td></tr>`;
+        return;
+    }
+    lista.forEach(paciente => {
+        let nombreCompleto = `${paciente.nombre} ${paciente.apellido}`;
+        let documento = paciente.documentoIdentidad;
+        let ordenes = paciente.ordenes || [];
+        if (ordenes.length === 0) {
+            // Si el paciente no tiene órdenes, muestra una fila vacía
+            tbody.innerHTML += `
+                <tr>
+                    <td>${nombreCompleto}</td>
+                    <td>${documento}</td>
+                    <td colspan="3">Sin órdenes</td>
+                </tr>
+            `;
+        } else {
+            ordenes.forEach(orden => {
+                let numeroOrden = orden.numeroOrden || '';
+                let terapias = orden.terapias || [];
+                if (terapias.length === 0) {
+                    // Si la orden no tiene terapias, muestra una fila vacía
+                    tbody.innerHTML += `
+                        <tr>
+                            <td>${nombreCompleto}</td>
+                            <td>${documento}</td>
+                            <td>${numeroOrden}</td>
+                            <td colspan="2">Sin terapias</td>
+                        </tr>
+                    `;
+                } else {
+                    terapias.forEach(terapia => {
+                        let nombreTerapia = terapia.nombreTerapia || '';
+                        let cantidad = terapia.cantidadDisponible || terapia.cantidad || 0;
+                        tbody.innerHTML += `
+                            <tr>
+                                <td>${nombreCompleto}</td>
+                                <td>${documento}</td>
+                                <td>${numeroOrden}</td>
+                                <td>${nombreTerapia}</td>
+                                <td>${cantidad}</td>
+                            </tr>
+                        `;
+                    });
+                }
+            });
+        }
+    });
+}
+
+function filtrarPacientes() {
+    const filtro = document.getElementById('filtro-paciente').value.toLowerCase();
+    const filtrados = pacientesGlobal.filter(p =>
+        (p.nombre + ' ' + p.apellido).toLowerCase().includes(filtro) ||
+        (p.documentoIdentidad + '').includes(filtro)
+    );
+    mostrarPacientesFiltrados(filtrados);
+}

@@ -46,5 +46,15 @@ public class OrdenController {
     public ResponseEntity<List<OrdenResponseDTO>> listarOrdenesPorPaciente(@PathVariable Long pacienteId) {
         return ResponseEntity.ok(ordenService.listarOrdenesPorPaciente(pacienteId));
     }
+    @PreAuthorize("hasAuthority('ADMIN') or hasAuthority('SECRETARIA')")
+    @GetMapping("/buscar-por-numero")
+    public ResponseEntity<OrdenResponseDTO> buscarPorNumeroOrden(@RequestParam String numeroOrden) {
+        OrdenResponseDTO orden = ordenService.buscarPorNumeroOrden(numeroOrden);
+        if (orden != null) {
+            return ResponseEntity.ok(orden);
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+    }
 }
 
